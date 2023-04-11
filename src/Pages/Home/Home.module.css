@@ -1,0 +1,127 @@
+.main_container {
+  color: #fff;
+
+  font-family: "Manrope", sans-serif;
+}
+
+.background_container {
+  background: #000;
+  height: 100vh;
+}
+
+.first_view_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.first_view_heading span{
+    color: #ECBA00;
+}
+
+.first_view_heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  max-width: 45rem;
+}
+
+.first_view_tagline {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  max-width: 40rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.first_view_uuid_heading {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  max-width: 50rem;
+  margin-right: 1rem;
+}
+
+.first_view_uuid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first_view_uuid_icon {
+  margin-top: 1rem;
+}
+
+.first_view_button_one {
+  background: #fff;
+  color: #000;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.navbar_header {
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.first_view_button {
+  background: #fff;
+  color: #000;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.brand_text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+* {
+  transition: all 0.3s ease;
+}
+
+/* write the media query for mobile devices */
+
+@media screen and (max-width: 600px) {
+  .first_view_heading {
+    font-size: 1.5rem;
+  }
+
+  .first_view_tagline {
+    font-size: 0.8rem;
+  }
+
+  .first_view_uuid_heading {
+    font-size: 1rem;
+  }
+
+  .first_view_button_one {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .first_view_button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
