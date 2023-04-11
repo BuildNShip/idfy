@@ -22,7 +22,7 @@ const Home = () => {
         <div className={styles.first_view_container}>
           <div className={styles.first_view}>
             <p className={styles.first_view_heading}>
-              Generate Unique ID with Ease For Your App using <span>IDfy</span>.
+              Generate Unique UUID with Ease For Your App using <span>IDfy</span>.
             </p>
             <p className={styles.first_view_tagline}>
               IDfy is a simple and easy to use library that generates unique ID
