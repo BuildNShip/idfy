@@ -48,52 +48,24 @@ const UuidGenerator = () => {
       setUuidsCopy(
         uuids.map(
           (uuid, index) =>
-            `"${uuid}" ${
-              checkboxState.commaSeparated && index !== uuids.length - 1
+            `"${uuid}"${
+              checkboxRefCS.current.checked && index !== uuids.length - 1
                 ? ","
                 : ""
-            }`
+            } `
         )
       )
     } else {
       setUuidsCopy(
         uuids.map(
           (uuid, index) =>
-            `${uuid} ${
-              checkboxState.commaSeparated && index !== uuids.length - 1
+            `${uuid}${
+              checkboxRefCS.current.checked && index !== uuids.length - 1
                 ? ","
                 : ""
-            }`
+            } `
         )
       )
-    }
-
-    if (checkboxRefCS.current.checked) {
-      setUuidsCopy(
-        uuids.map((uuid, index) => {
-          if (index !== uuids.length - 1) {
-            return uuid + ","
-          } else {
-            return uuid
-          }
-        })
-      )
-    } else {
-      setUuidsCopy(uuids)
-    }
-
-    if (checkboxRefNL.current.checked) {
-      setUuidsCopy(
-        uuids.map((uuid, index) => {
-          if (index !== uuids.length - 1) {
-            return uuid + "\n"
-          } else {
-            return uuid
-          }
-        })
-      )
-    } else {
-      setUuidsCopy(uuids)
     }
 
     console.log(checkboxState)
@@ -110,7 +82,10 @@ const UuidGenerator = () => {
                   checkboxState.nextLine ? (
                     <p className={styles.uuid}>{uuid}</p>
                   ) : (
-                    <span className={styles.uuid}>{uuid}</span>
+                    <span className={styles.uuid}>
+                      {uuid}
+                      {" "}
+                    </span>
                   )
                 )}
               </div>
@@ -136,8 +111,10 @@ const UuidGenerator = () => {
             </button>
             <button
               onClick={() => {
-                navigator.clipboard.writeText(uuids.join("\r\n"))
-                console.log(uuids.join("\r\n"))
+                navigator.clipboard.writeText(
+                  uuidsCopy.join(checkboxState.nextLine ? "\r\n" : " ")
+                )
+               
               }}
               className={styles.button_secondary}
             >
