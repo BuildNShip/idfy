@@ -1,0 +1,218 @@
+.main_container {
+  color: #fff;
+
+  font-family: "Manrope", sans-serif;
+}
+
+.background_container {
+  background: #000;
+  height: 100vh;
+}
+
+.first_view_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 90vh;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.display_uuids_container {
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  background-color: #ffffff0d;
+  border-radius: 16px;
+  padding: 20px;
+  height: 500px;
+  position: relative;
+  width: 610px;
+  will-change: transform;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  font-size: 18px;
+  letter-spacing: 0.05rem;
+  line-height: 2.25em;
+  text-align: start;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: none;
+  margin: 20px 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #eed67f;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ebe0b9;
+}
+
+.input {
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  background-color: #ffffff0d;
+  border-radius: 8px 0 0 8px;
+  padding: 15px;
+  position: relative;
+  min-width: 20rem;
+  max-width: 25rem;
+  will-change: transform;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  font-size: 18px;
+  letter-spacing: 0rem;
+  line-height: 1.6em;
+  text-align: start;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: none;
+  margin: 20px 0;
+}
+
+.button {
+  border-radius: 0;
+
+  border: 1px solid transparent;
+  padding: 1em 1.2em;
+  font-size: 1em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background-color: #ecba00;
+  color: #000;
+  transition: 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: #f3c82e;
+}
+
+.button_secondary:hover {
+  border: 1px solid #f5d049;
+  color: #f5d049;
+}
+
+.button_secondary {
+  border-radius: 0 8px 8px 0;
+  border: 1px solid #ecba00;
+  padding: 1em 1.2em;
+  font-size: 1em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: #ecba00;
+  transition: 0.3s ease-in-out;
+}
+
+.copycode_container {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  position: fixed; /* set the position property to fixed */
+  top: 20px; /* position the fixed div relative to the viewport */
+  right: 20px;
+}
+.copycode_container svg {
+  width: 18px;
+  color: white;
+}
+.copycode_container p {
+  font-size: 13px;
+  font-weight: 800;
+  margin: 0;
+  color: white;
+}
+
+.bulk_view span {
+  color: #ecba00;
+  font-weight: 600;
+}
+
+.bulk_view {
+  margin-top: 2rem;
+}
+
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  height: 3rem;
+  border-top: 1px solid rgb(81, 80, 80);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(0, 0, 0);
+}
+
+.footer a {
+  width: 100px;
+}
+
+.footer a img {
+  width: 100px;
+  height: 60%;
+  margin-left: 40px;
+}
+
+.social_container {
+  width: max-content;
+  height: 100%;
+  display: flex;
+  gap: 15px;
+  margin-right: 20px;
+}
+
+.footer .social_container a {
+  height: 100%;
+  width: max-content;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .footer a img {
+    margin-left: 14px;
+  }
+  .footer .social_container {
+    gap: 8px;
+  }
+}
+
+.check_boxes {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
+}
+
+.checkbox_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+}
+
+.checkbox_container input {
+  margin-right: 0.5rem;
+}
