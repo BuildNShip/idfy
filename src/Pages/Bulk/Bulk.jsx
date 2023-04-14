@@ -33,9 +33,37 @@ const UuidGenerator = () => {
       commaSeparated: checkboxRefCS.current.checked,
       doubleQuotes: checkboxRefDQ.current.checked,
     }))
-    console.log(checkboxState)
   }, [checkboxRefNL, checkboxRefCS, checkboxRefDQ])
 
+  const handleJSONDownload = () => {
+
+    const jsonData = JSON.stringify(uuids);
+
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.download = `idfy-${uuids.length}.json`;
+    a.href = url;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  function handleCSVDownload() {
+    
+    const csvData = uuids.map(item => [item].join(',')).join('\n');
+    const blob = new Blob([csvData], {type: 'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.download = `idfy-${uuids.length}.csv`;
+    a.href = url;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  
   const handleChecboxChange = (e) => {
     setCheckboxState((prevState) => ({
       ...prevState,
@@ -48,27 +76,17 @@ const UuidGenerator = () => {
       setUuidsCopy(
         uuids.map(
           (uuid, index) =>
-            `"${uuid}"${
-              checkboxRefCS.current.checked && index !== uuids.length - 1
-                ? ","
-                : ""
-            } `
+            `"${uuid}"${checkboxRefCS.current.checked && index !== uuids.length - 1 ? "," : ""} `
         )
       )
     } else {
       setUuidsCopy(
         uuids.map(
           (uuid, index) =>
-            `${uuid}${
-              checkboxRefCS.current.checked && index !== uuids.length - 1
-                ? ","
-                : ""
-            } `
+            `${uuid}${checkboxRefCS.current.checked && index !== uuids.length - 1 ? "," : ""} `
         )
       )
     }
-
-    console.log(checkboxState)
   }
 
   return (
@@ -114,7 +132,6 @@ const UuidGenerator = () => {
                 navigator.clipboard.writeText(
                   uuidsCopy.join(checkboxState.nextLine ? "\r\n" : " ")
                 )
-               
               }}
               className={styles.button_secondary}
             >
@@ -161,6 +178,10 @@ const UuidGenerator = () => {
               />
               <p className={styles.checkbox_label}>Double Quotes</p>
             </div>
+          </div>
+          <div>
+            <button className={styles.download_button} onClick={handleJSONDownload}>Download JSON</button>
+            <button className={styles.download_button} onClick={handleCSVDownload}>Download CSV</button>
           </div>
           <p className={styles.bulk_view}>
             Do you want to generate single UUID?{" "}

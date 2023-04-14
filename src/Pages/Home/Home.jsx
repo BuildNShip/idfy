@@ -94,7 +94,7 @@ const Home = () => {
               </button>
             </div>
             <p className={styles.bulk_view}>
-              Do you want to generate buik UUIDs?{" "}
+              Do you want to generate bulk UUIDs?{" "}
 
               <Link to="/bulk"><span>Click Here!</span></Link>
             </p>
