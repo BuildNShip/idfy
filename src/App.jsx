@@ -1,12 +1,13 @@
 import "./App.css"
 import Home from "./Pages/Home/Home"
 import Bulk from "./Pages/Bulk/Bulk"
+import history from "./history"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router history={history}>
         <Routes>
           <Route path="/" element={<Home />} />
 
