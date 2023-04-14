@@ -1,12 +1,29 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { ChakraProvider } from "@chakra-ui/react"
+
+import { ChakraProvider, extendTheme, useToast, Button } from "@chakra-ui/react"
 import App from "./App"
 import "./index.css"
 
+const customTheme = extendTheme({
+  components: {
+    Alert: {
+      variants: {
+        // define own toast variant
+        toast: {
+          container: {
+            color: "#000",
+            bg: "#ecba00",
+          },
+        },
+      },
+    },
+  },
+})
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <App />
     </ChakraProvider>
   </React.StrictMode>

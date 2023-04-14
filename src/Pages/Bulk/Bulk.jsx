@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid"
 import { Link } from "react-router-dom"
 import BuildNShip from "/BuildNShip.png"
 import { FaInstagram, FaTwitter, FaGithub, FaTelegram } from "react-icons/fa"
+import { useToast } from "@chakra-ui/react"
 
 const UuidGenerator = () => {
   const [input, setInput] = useState("")
@@ -15,10 +16,14 @@ const UuidGenerator = () => {
   const checkboxRefDQ = useRef(null)
 
   const [checkboxState, setCheckboxState] = useState({
-    nextLine: false,
+    nextLine: true,
     commaSeparated: false,
     doubleQuotes: false,
   })
+
+  useEffect(() => {
+    checkboxRefNL.current.checked = true
+  }, [checkboxRefNL])
 
   const generateUuids = (count) => {
     const newUuids = Array.from({ length: count }, () => uuidv4())
@@ -36,34 +41,32 @@ const UuidGenerator = () => {
   }, [checkboxRefNL, checkboxRefCS, checkboxRefDQ])
 
   const handleJSONDownload = () => {
+    const jsonData = JSON.stringify(uuids)
 
-    const jsonData = JSON.stringify(uuids);
+    const blob = new Blob([jsonData], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
 
-    const blob = new Blob([jsonData], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.download = `idfy-${uuids.length}.json`;
-    a.href = url;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
+    const a = document.createElement("a")
+    a.download = `idfy-${uuids.length}.json`
+    a.href = url
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
 
   function handleCSVDownload() {
-    
-    const csvData = uuids.map(item => [item].join(',')).join('\n');
-    const blob = new Blob([csvData], {type: 'text/csv;charset=utf-8;'});
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.download = `idfy-${uuids.length}.csv`;
-    a.href = url;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const csvData = uuids.map((item) => [item].join(",")).join("\n")
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" })
+    const url = URL.createObjectURL(blob)
+
+    const a = document.createElement("a")
+    a.download = `idfy-${uuids.length}.csv`
+    a.href = url
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
   }
-  
+
   const handleChecboxChange = (e) => {
     setCheckboxState((prevState) => ({
       ...prevState,
@@ -76,18 +79,28 @@ const UuidGenerator = () => {
       setUuidsCopy(
         uuids.map(
           (uuid, index) =>
-            `"${uuid}"${checkboxRefCS.current.checked && index !== uuids.length - 1 ? "," : ""} `
+            `"${uuid}"${
+              checkboxRefCS.current.checked && index !== uuids.length - 1
+                ? ","
+                : ""
+            } `
         )
       )
     } else {
       setUuidsCopy(
         uuids.map(
           (uuid, index) =>
-            `${uuid}${checkboxRefCS.current.checked && index !== uuids.length - 1 ? "," : ""} `
+            `${uuid}${
+              checkboxRefCS.current.checked && index !== uuids.length - 1
+                ? ","
+                : ""
+            } `
         )
       )
     }
   }
+
+  const toast = useToast()
 
   return (
     <div className={styles.main_container}>
@@ -100,10 +113,7 @@ const UuidGenerator = () => {
                   checkboxState.nextLine ? (
                     <p className={styles.uuid}>{uuid}</p>
                   ) : (
-                    <span className={styles.uuid}>
-                      {uuid}
-                      {" "}
-                    </span>
+                    <span className={styles.uuid}>{uuid} </span>
                   )
                 )}
               </div>
@@ -120,7 +130,24 @@ const UuidGenerator = () => {
             <button
               onClick={() => {
                 if (input > 0) {
+                  toast.closeAll()
+                  toast({
+                    title: `${input} UUIDs generated.`,
+                    variant: "toast",
+                    position: "top-right",
+                    duration: 1000,
+                    isClosable: true,
+                  })
                   generateUuids(input)
+                } else {
+                  toast.closeAll()
+                  toast({
+                    title: `Please enter a valid number.`,
+                    variant: "toast",
+                    position: "top-right",
+                    duration: 1000,
+                    isClosable: true,
+                  })
                 }
               }}
               className={styles.button}
@@ -129,9 +156,28 @@ const UuidGenerator = () => {
             </button>
             <button
               onClick={() => {
-                navigator.clipboard.writeText(
-                  uuidsCopy.join(checkboxState.nextLine ? "\r\n" : " ")
-                )
+                if (uuids.length > 0) {
+                  navigator.clipboard.writeText(
+                    uuidsCopy.join(checkboxState.nextLine ? "\r\n" : " ")
+                  )
+                  toast.closeAll()
+                  toast({
+                    title: `Generated UUIDs Copied.`,
+                    variant: "toast",
+                    position: "top-right",
+                    duration: 1000,
+                    isClosable: true,
+                  })
+                } else {
+                  toast.closeAll()
+                  toast({
+                    title: `No UUIDs to copy.`,
+                    variant: "toast",
+                    position: "top-right",
+                    duration: 1000,
+                    isClosable: true,
+                  })
+                }
               }}
               className={styles.button_secondary}
             >
@@ -180,8 +226,65 @@ const UuidGenerator = () => {
             </div>
           </div>
           <div>
-            <button className={styles.download_button} onClick={handleJSONDownload}>Download JSON</button>
-            <button className={styles.download_button} onClick={handleCSVDownload}>Download CSV</button>
+            <button
+              className={styles.download_button}
+              onClick={() => {
+                if (uuids.length > 0) {
+                  handleJSONDownload()
+                } else {
+                  toast.closeAll()
+                  toast({
+                    title: `No UUIDs to download.`,
+                    variant: "toast",
+                    position: "top-right",
+                    duration: 1000,
+                    isClosable: true,
+                  })
+                }
+              }}
+            >
+              Download JSON
+            </button>
+            <button
+              className={styles.download_button}
+              onClick={() => {
+                if (uuids.length > 0) {
+                  handleCSVDownload()
+                } else {
+                  toast.closeAll()
+                  toast({
+                    title: `No UUIDs to download.`,
+                    variant: "toast",
+                    position: "top-right",
+                    duration: 1000,
+                    isClosable: true,
+                  })
+                }
+              }}
+            >
+              Download CSV
+            </button>
+            <button
+              className={styles.clear_button}
+              onClick={() => {
+                if (uuids.length > 0) {
+                  setUuidsCopy([])
+                  setUuids([])
+                  setInput("")
+                } else {
+                  toast.closeAll()
+                  toast({
+                    title: `No UUIDs to clear`,
+                    variant: "toast",
+                    position: "top-right",
+                    duration: 1000,
+                    isClosable: true,
+                  })
+                }
+              }}
+            >
+              Clear All
+            </button>
           </div>
           <p className={styles.bulk_view}>
             Do you want to generate single UUID?{" "}

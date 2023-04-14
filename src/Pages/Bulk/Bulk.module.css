@@ -6,7 +6,8 @@
 
 .background_container {
   background: #000;
-  height: 100vh;
+  min-height: 100vh;
+  padding-bottom: 2rem;
 }
 
 .first_view_container {
@@ -200,10 +201,40 @@
   }
 }
 
+@media only screen and (min-width: 768px) {
+  .display_uuids_container {
+    min-width: 36rem;
+  }
+}
+
+@media only screen and (max-width: 626px) {
+  .button_secondary {
+    border-radius: 8px;
+  }
+
+  .button {
+    border-radius: 0 8px 8px 0;
+  }
+}
+
+@media only screen and (max-width: 496px) {
+  .button_secondary {
+    border-radius: 0 8px 8px 0;
+  }
+
+  .button {
+    border-radius: 8px 0 0 8px;
+  }
+
+  .input {
+    border-radius: 8px;
+  }
+}
+
 .check_boxes {
   display: flex;
   flex-direction: row;
-  padding: 2rem;
+  margin: 2rem;
 }
 
 .checkbox_container {
@@ -218,8 +249,14 @@
   margin-right: 0.5rem;
 }
 
-.download_button  {
+.download_button {
   margin-left: 10px;
   color: #ecba00;
+  font-weight: 600;
+}
+
+.clear_button {
+  margin-left: 10px;
+  color: #ffffff;
   font-weight: 600;
 }

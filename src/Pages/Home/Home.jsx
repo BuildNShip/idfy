@@ -39,12 +39,13 @@ const Home = () => {
                 className={styles.first_view_uuid_icon}
                 size={32}
                 onClick={() => {
+                  toast.closeAll()
                   toast({
                     title: "UUID Copied.",
                     description: "Your UUID has been copied to your clipboard.",
-                    status: "success",
+                    variant: "toast",
                     position: "top-right",
-                    duration: 3000,
+                    duration: 1000,
                     isClosable: true,
                   })
                   navigator.clipboard.writeText(id)
@@ -60,15 +61,15 @@ const Home = () => {
                   navigator.clipboard.writeText(id)
                   const unique_id = uuid()
                   setId(unique_id)
+                  toast.closeAll()
                   toast({
                     title: "UUID Copied and Generated.",
                     description:
-                      "Your UUID has been copied to your clipboard and a new UUID has been generated.",
-                    status: "success",
+                      "Your UUID has been copied & New UUID has been generated.",
+                    variant: "toast",
                     position: "top-right",
                     duration: 1000,
                     isClosable: true,
-                    bg: "#ecba00",
                   })
                 }}
               >
@@ -79,14 +80,14 @@ const Home = () => {
                 onClick={() => {
                   const unique_id = uuid()
                   setId(unique_id)
+                  toast.closeAll()
                   toast({
                     title: "UUID Generated.",
                     description: "A new UUID has been generated.",
-                    status: "success",
+                    variant: "toast",
                     position: "top-right",
                     duration: 1000,
                     isClosable: true,
-                    bg: "#ecba00",
                   })
                 }}
               >
@@ -95,8 +96,9 @@ const Home = () => {
             </div>
             <p className={styles.bulk_view}>
               Do you want to generate bulk UUIDs?{" "}
-
-              <Link to="/bulk"><span>Click Here!</span></Link>
+              <Link to="/bulk">
+                <span>Click Here!</span>
+              </Link>
             </p>
           </div>
         </div>
