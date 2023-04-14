@@ -125,6 +125,30 @@ const UuidGenerator = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className={styles.input}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  if (input > 0) {
+                    toast.closeAll()
+                    toast({
+                      title: `${input} UUIDs generated.`,
+                      variant: "toast",
+                      position: "top-right",
+                      duration: 1000,
+                      isClosable: true,
+                    })
+                    generateUuids(input)
+                  } else {
+                    toast.closeAll()
+                    toast({
+                      title: `Please enter a valid number.`,
+                      variant: "toast",
+                      position: "top-right",
+                      duration: 1000,
+                      isClosable: true,
+                    })
+                  }
+                }
+              }}
               placeholder="Enter number of UUIDs to generate"
             />
             <button
