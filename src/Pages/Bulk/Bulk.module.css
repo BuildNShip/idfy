@@ -216,3 +216,9 @@
 .checkbox_container input {
   margin-right: 0.5rem;
 }
+
+.download_button  {
+  margin-left: 10px;
+  color: #ecba00;
+  font-weight: 600;
+}
