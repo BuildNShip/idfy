@@ -75,6 +75,26 @@ const UuidGenerator = () => {
       doubleQuotes: checkboxRefDQ.current.checked,
     }))
 
+    if (uuids.length === 0) {
+      toast.closeAll()
+      toast({
+        title: `Add UUIDs to update structure.`,
+        variant: "toast",
+        position: "top-right",
+        duration: 1000,
+        isClosable: true,
+      })
+    } else {
+      toast.closeAll()
+      toast({
+        title: `UUIDs Strucuture Updated!`,
+        variant: "toast",
+        position: "top-right",
+        duration: 1000,
+        isClosable: true,
+      })
+    }
+
     if (checkboxRefDQ.current.checked) {
       setUuidsCopy(
         uuids.map(
@@ -292,6 +312,13 @@ const UuidGenerator = () => {
               className={styles.clear_button}
               onClick={() => {
                 if (uuids.length > 0) {
+                  toast({
+                    title: `All UUIDs cleared.`,
+                    variant: "toast",
+                    position: "top-right",
+                    duration: 1000,
+                    isClosable: true,
+                  })
                   setUuidsCopy([])
                   setUuids([])
                   setInput("")
